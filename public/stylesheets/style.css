@@ -1,0 +1,32 @@
+.choice {
+	cursor: default;
+	line-height: 1.4;
+	letter-spacing: 0.02em;
+}
+.list-group-item.active.correct-choice, 
+.list-group-item.active.correct-choice:focus, 
+.list-group-item.active.correct-choice:hover {
+	background-color: red;
+}
+.exam-result {
+	margin-bottom: 30px;
+}
+.question-text {
+	margin-top: 60px;
+	margin-bottom: 25px;
+	line-height: 1.4;
+	letter-spacing: 0.04em;
+}
+.answer-key {
+	margin-top: 15px;
+}
+.bottom-15 {
+	margin-bottom: 15px;
+}
+.category-button {
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.question-image {
+	max-width: 50%
+}

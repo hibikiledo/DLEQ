@@ -1,0 +1,44 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+    {
+      name      : "DLEQ",
+      script    : "./bin/dleq",
+      env: {
+        COMMON_VARIABLE: "true"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    },    
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    production : {
+      user : "node",
+      host : "128.199.215.158",
+      ref  : "origin/master",
+      repo : "git@github.com:hibikiledo/DLEQ.git",
+      path : "/home/node/dleq/production",
+      "post-deploy" : "sed -i -e 's/127.0.0.1:3000/dleq.hibikiledo.xyz/g' ./routes/index.js && npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+    dev : {
+      user : "node",
+      host : "128.199.215.158",
+      ref  : "origin/master",
+      repo : "git@github.com:repo.git",
+      path : "/home/node/dleq/development",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env dev",
+      env  : {
+        NODE_ENV: "dev"
+      }
+    }
+  }
+}
