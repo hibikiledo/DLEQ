@@ -59,8 +59,8 @@
 	      totalScore: 0
 	    };
 	  },
-	  componentDidMount: function () {
 
+	  componentDidMount: function () {
 	    $.ajax({
 	      url: `${ this.props.baseUrl }/api/exam/${ this.props.examId }`,
 	      success: res => {
@@ -82,16 +82,14 @@
 	  },
 
 	  handleQuizSumission: function () {
-	    let totalScore = this.state.scores.reduce((prev, current) => {
-	      return prev += current;
+	    let totalScore = this.state.scores.reduce((sum, current) => {
+	      return sum += current;
 	    }, 0);
 	    this.setState({ examSubmitted: true, totalScore: totalScore });
-	    $("html, body").animate({ scrollTop: 0 }, "slow");
 
 	    let data = this.state.questions.map((q, i) => {
 	      return { _id: q._id, correct: this.state.scores[i] === 1 };
 	    });
-
 	    $.ajax({
 	      url: `${ this.props.baseUrl }/api/exam/result`,
 	      method: "POST",
@@ -101,6 +99,8 @@
 	        console.log('success');
 	      }
 	    });
+
+	    $("html, body").animate({ scrollTop: 0 }, "slow");
 	  },
 
 	  render: function () {
@@ -257,7 +257,7 @@
 	        key: i,
 	        choiceNo: i,
 	        choice: c,
-	        checked: this.state.choiceCheckStates[i],
+	        selected: this.state.choiceCheckStates[i],
 	        showAnswerKey: this.props.showAnswerKey,
 	        onChoiceSelected: this.handleChoiceSelected });
 	    });
@@ -337,7 +337,7 @@
 	// Choice
 	// key : unique identifier for each choice in an array
 	// choiceNo : unique identifier for each choice in an array
-	// checked : indicate if this choice is checked or not
+	// selected : indicate if this choice is selected or not
 	// mode : if exam hilight color is blue. if result hilight color is red
 	// onChoiceSelected : callback function when choice text or radio button is clicked
 	//   callback signature - function(props) {} - where props are this.props of choice
@@ -351,7 +351,7 @@
 
 	    let cssClasses = ['list-group-item', 'choice'];
 
-	    if (this.props.checked) {
+	    if (this.props.selected) {
 	      cssClasses.push('active');
 	    }
 	    if (this.props.showAnswerKey && this.props.choice.correct) {

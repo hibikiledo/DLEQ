@@ -49,7 +49,6 @@
 	var ReactDOM = __webpack_require__(35);
 	var ReactBootstrapSlider = __webpack_require__(173).default;
 
-	/* ROOT */
 	var QuizMakerApp = React.createClass({
 		displayName: 'QuizMakerApp',
 
@@ -136,8 +135,8 @@
 			}, 0);
 
 			let totalQuestionCount = 0;
-			for (key in this.state.categorySettings) {
-				totalQuestionCount += this.state.categorySettings[key].preferQuestionCount;
+			for (category in this.state.categorySettings) {
+				totalQuestionCount += this.state.categorySettings[category].preferQuestionCount;
 			}
 
 			return React.createElement(
