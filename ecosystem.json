@@ -11,7 +11,8 @@
         COMMON_VARIABLE: "true"
       },
       env_production : {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        PUBLIC_URL: "https://dleq.hibikiledo.xyz"
       }
     },    
   ],
@@ -27,7 +28,7 @@
       ref  : "origin/master",
       repo : "git@github.com:hibikiledo/DLEQ.git",
       path : "/home/node/dleq/production",
-      "post-deploy" : "sed -i -e 's/http:\/\/127.0.0.1:3000/https:\/\/dleq.hibikiledo.xyz/g' ./routes/index.js && npm install && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
     },
     dev : {
       user : "node",

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const host = 'http://127.0.0.1:3000';
+const host = process.env.PUBLIC_URL;
 
 /* Quiz maker page */
 router.get('/', function(req, res, next) {
