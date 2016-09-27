@@ -79,7 +79,12 @@ router.get('/exam/:id', function(req, res, next) {
 			.find({}, {tries: 0, success: 0, failure: 0})
 			.toArray((err, result) => {
 				assert.equal(null, err);
-				res.json({success: true, data: result});
+				if (result.length == 0) {
+					res.json({success: false, reason: `Exam with ${examId} is not valid.`});
+				} else {
+					res.json({success: true, data: result});
+				}
+				
 			});
 	});	
 });

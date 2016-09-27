@@ -25,9 +25,11 @@ var QuizApp = React.createClass({
             initialScores[i] = 0;
           }
           this.setState({questions: res.data, scores: initialScores});
+        } else {
+          window.location = this.props.baseUrl;
         }
       }
-    });    
+    });
   },
 
   handleAnswerSelected: function(result) {
@@ -174,7 +176,7 @@ var Question = React.createClass({
 
     if (childProps.choice.correct) {
       this.setState({score: 1});
-      this.props.onAnswerSelected({questionNo: this.props.questionNo, score: 1});         
+      this.props.onAnswerSelected({questionNo: this.props.questionNo, score: 1});
     }
     else {
       this.setState({score: 0});
@@ -212,7 +214,7 @@ var Question = React.createClass({
         <ul className="list-group">
          {choices}
         </ul>
-        <AnswerKey answer={question.answer} showAnswerKey={this.props.showAnswerKey} />        
+        <AnswerKey answer={question.answer} showAnswerKey={this.props.showAnswerKey} />
       </div>
     );
 
@@ -291,7 +293,7 @@ var Choice = React.createClass({
 
     return (
       <h4>
-        <li className={cssClasses.join(' ')} onClick={this.handleClick}>               
+        <li className={cssClasses.join(' ')} onClick={this.handleClick}>
           {this.props.choice.text}
         </li>
       </h4>

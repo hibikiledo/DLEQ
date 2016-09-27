@@ -70,6 +70,8 @@
 	            initialScores[i] = 0;
 	          }
 	          this.setState({ questions: res.data, scores: initialScores });
+	        } else {
+	          window.location = this.props.baseUrl;
 	        }
 	      }
 	    });
