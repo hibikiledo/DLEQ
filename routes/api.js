@@ -76,7 +76,7 @@ router.get('/exam/:id', function(req, res, next) {
 		assert.equal(null, err);
 		db
 			.collection(examId)
-			.find()
+			.find({}, {tries: 0, success: 0, failure: 0})
 			.toArray((err, result) => {
 				assert.equal(null, err);
 				res.json({success: true, data: result});
