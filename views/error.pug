@@ -1,6 +1,10 @@
 extends layout
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+block content  
+  h3(class=error.status === undefined ? 'hidden' : 'show')= error.status
+  pre(class=error.stack === undefined ? 'hidden' : 'show')= error.stack
+  
+  div(style="display: table; position: absolute; width: 100%; height:100%")
+    div(style="display:table-cell; vertical-align: middle")
+      h2(style="text-align: center;")= message      
+      a(style="text-align: center; display: block" href=`${baseUrl}`) กลับหน้าหลัก

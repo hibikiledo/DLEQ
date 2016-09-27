@@ -8,9 +8,10 @@ router.get('/', function(req, res, next) {
 	res.render(
 		'index',
 		{
-			title: 'ข้อสอบใบขับขี่',
+			title: 'แบบทดสอบ ข้อสอบใบขับขี่ พร้อมเฉลย',
+			description: 'ลองทำข้อสองใบขับขี่ออนไลน์ ลองทำได้ไม่จำกัดจำนวนครั้ง รู้ผลคะแนนทันที',
 			subTitle: '',
-			baseUrl: host 
+			baseUrl: host
 		}
 	);
 });
@@ -23,7 +24,7 @@ router.get('/exam/:id', function(req, res, next) {
 			baseUrl: host,
 			examId: req.params.id,
 			title: 'ข้อสอบใบขับขี่',
-			subTitle: req.params.id
+			subTitle: ''
 		}
 	);
 });

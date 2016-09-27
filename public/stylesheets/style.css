@@ -3,6 +3,7 @@
 	line-height: 1.4;
 	letter-spacing: 0.02em;
 }
+/* Override color of active to red to show correct choice */
 .list-group-item.active.correct-choice, 
 .list-group-item.active.correct-choice:focus, 
 .list-group-item.active.correct-choice:hover {
@@ -29,4 +30,7 @@
 }
 .question-image {
 	max-width: 50%
+}
+.end-of-page-margin {
+	margin-bottom: 20px;
 }

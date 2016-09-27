@@ -101,8 +101,9 @@ var QuizApp = React.createClass({
             <div className="col-md-offset-3 col-md-6">
               <h1>ผลสอบ {this.state.totalScore} / {this.state.questions.length} คะแนน</h1>
               <p>
-                เช็คข้อผิดและเฉลยได้ด้านล่าง หากพบข้อสงสัยสามารถสอบถามได้ที่ <a href="#">Issue Tracker</a>
+                เช็คข้อผิดและเฉลยได้ด้านล่าง หากพบข้อสงสัยสามารถสอบถามได้ที่ <a href="https://github.com/hibikiledo/DLEQ/issues">Issue Tracker</a>                
               </p>
+              <a href={this.props.baseUrl}>สร้างแบบทดสอบใหม่</a>              <a href={`${this.props.baseUrl}/exam/${this.props.examId}`}>ทำใหม่อีกครั้ง</a>
             </div>
           </div>    
         </div>
@@ -117,21 +118,31 @@ var QuizApp = React.createClass({
           </div>    
         </div>
 
-        <hr />
+        <hr className={this.state.examSubmitted ? 'hidden' : 'show'} />
 
-        <div className="container">
+        <div className={(this.state.examSubmitted ? 'hidden' : 'show') + ' container'}>
           <div className="row">
             <div className="col-md-offset-3 col-md-6">
               <div className="text-right">
                 <button type="button" 
                   className="btn btn-success btn-lg bottom-15"
                   onClick={this.handleQuizSumission}>
-                    ส่งข้องสอบ
+                    ส่งข้อสอบ
                 </button>
               </div>
             </div>
           </div>                
         </div>
+
+        <div className={(this.state.examSubmitted ? 'show' : 'hidden') + ' container'}>
+          <div className="row">
+            <div className="col-md-offset-3 col-md-6">
+              <div className="text-right end-of-page-margin">
+                <a href="#exam-result">^กลับไปด้านบน</a>
+              </div>
+            </div>
+          </div>                
+        </div>        
 
       </div>
     );

@@ -171,9 +171,20 @@
 	              'เช็คข้อผิดและเฉลยได้ด้านล่าง หากพบข้อสงสัยสามารถสอบถามได้ที่ ',
 	              React.createElement(
 	                'a',
-	                { href: '#' },
+	                { href: 'https://github.com/hibikiledo/DLEQ/issues' },
 	                'Issue Tracker'
 	              )
+	            ),
+	            React.createElement(
+	              'a',
+	              { href: this.props.baseUrl },
+	              'สร้างแบบทดสอบใหม่'
+	            ),
+	            '              ',
+	            React.createElement(
+	              'a',
+	              { href: `${ this.props.baseUrl }/exam/${ this.props.examId }` },
+	              'ทำใหม่อีกครั้ง'
 	            )
 	          )
 	        )
@@ -192,10 +203,10 @@
 	          )
 	        )
 	      ),
-	      React.createElement('hr', null),
+	      React.createElement('hr', { className: this.state.examSubmitted ? 'hidden' : 'show' }),
 	      React.createElement(
 	        'div',
-	        { className: 'container' },
+	        { className: (this.state.examSubmitted ? 'hidden' : 'show') + ' container' },
 	        React.createElement(
 	          'div',
 	          { className: 'row' },
@@ -210,7 +221,28 @@
 	                { type: 'button',
 	                  className: 'btn btn-success btn-lg bottom-15',
 	                  onClick: this.handleQuizSumission },
-	                'ส่งข้องสอบ'
+	                'ส่งข้อสอบ'
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: (this.state.examSubmitted ? 'show' : 'hidden') + ' container' },
+	        React.createElement(
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-offset-3 col-md-6' },
+	            React.createElement(
+	              'div',
+	              { className: 'text-right end-of-page-margin' },
+	              React.createElement(
+	                'a',
+	                { href: '#exam-result' },
+	                '^กลับไปด้านบน'
 	              )
 	            )
 	          )
