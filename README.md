@@ -12,14 +12,14 @@ DLEQ has 2 goals.
 For testing purposes, I decided to create a web application using the data I collected. This is a simple web app with some nice little touch. You can choose # of questions from each categories and create you own exam!. There are more features coming given that I have time. You can test it here: [dleq.hibikiledo.xyz](http://dleq.hibikiledo.xyz)
 
 ## Download Dataset and Assets (JSON, CSV, Images)
-- หมวด กฎหมายว่าด้วยรถยนต์
-- หมวด กฎหมายว่าด้วยจราจรทางบก
+- หมวด กฎหมายว่าด้วยรถยนต์ [json](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B8%81%E0%B8%8E%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%A3%E0%B8%96%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C.json) - [csv](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B8%81%E0%B8%8E%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%A3%E0%B8%96%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C.csv)
+- หมวด กฎหมายว่าด้วยจราจรทางบก [json](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B8%81%E0%B8%8E%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%88%E0%B8%A3%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%9A%E0%B8%81.json) - [csv](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B8%81%E0%B8%8E%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%A2%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%88%E0%B8%A3%E0%B8%B2%E0%B8%88%E0%B8%A3%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%9A%E0%B8%81.csv)
 - หมวด เครื่องหมายพื้นทาง
 - หมวด ป้ายบังคับ
 - หมวด ป้ายเตือน
 - หมวด ป้ายแนะนำ
-- หมวด มารยาทและจิตสำนึก
-- หมวด เทคนิคการขับรถอย่างปลอดภัย
+- หมวด มารยาทและจิตสำนึก [json](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%97%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B6%E0%B8%81.json) - [csv](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%97%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%88%E0%B8%B4%E0%B8%95%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B6%E0%B8%81.csv)
+- หมวด เทคนิคการขับรถอย่างปลอดภัย [json](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B9%80%E0%B8%97%E0%B8%84%E0%B8%99%E0%B8%B4%E0%B8%84%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%82%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B8%96%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%9B%E0%B8%A5%E0%B8%AD%E0%B8%94%E0%B8%A0%E0%B8%B1%E0%B8%A2.json) - [csv](https://raw.githubusercontent.com/hibikiledo/DLEQ/master/datasets/%E0%B9%80%E0%B8%97%E0%B8%84%E0%B8%99%E0%B8%B4%E0%B8%84%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%82%E0%B8%B1%E0%B8%9A%E0%B8%A3%E0%B8%96%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%9B%E0%B8%A5%E0%B8%AD%E0%B8%94%E0%B8%A0%E0%B8%B1%E0%B8%A2.csv)
 - หมวด การบำรุงรักษารถ
 - หมวด รูปภาพจราจร
 - หมวด การรับรู้สถานการณ์อันตราย
