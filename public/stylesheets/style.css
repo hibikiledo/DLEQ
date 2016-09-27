@@ -1,3 +1,9 @@
+.bottom-15 {
+	margin-bottom: 15px;
+}
+.bottom-30 {
+	margin-bottom: 30px;
+}
 .choice {
 	cursor: default;
 	line-height: 1.4;
@@ -21,9 +27,6 @@
 .answer-key {
 	margin-top: 15px;
 }
-.bottom-15 {
-	margin-bottom: 15px;
-}
 .category-button {
 	margin-right: 5px;
 	margin-bottom: 5px;
@@ -33,4 +36,14 @@
 }
 .end-of-page-margin {
 	margin-bottom: 20px;
+}
+.find-us-on-github {
+	vertical-align: bottom;
+	line-height: 1em;
+	font-size: 0.75em;
+}
+.github-logo {
+	height: 18px;
+	position:relative;
+	bottom:0;
 }

@@ -50,284 +50,298 @@
 	var ReactBootstrapSlider = __webpack_require__(173).default;
 
 	var QuizMakerApp = React.createClass({
-		displayName: 'QuizMakerApp',
+	  displayName: 'QuizMakerApp',
 
 
-		getInitialState: function () {
-			return {
-				categories: [],
-				selectedStates: {},
-				categorySettings: {}
-			};
-		},
+	  getInitialState: function () {
+	    return {
+	      categories: [],
+	      selectedStates: {},
+	      categorySettings: {}
+	    };
+	  },
 
-		componentDidMount: function () {
-			$.ajax({
-				url: `${ this.props.baseUrl }/api/questions/categories`,
-				method: "GET",
-				success: data => {
-					this.setState({ categories: data });
+	  componentDidMount: function () {
+	    $.ajax({
+	      url: `${ this.props.baseUrl }/api/questions/categories`,
+	      method: "GET",
+	      success: data => {
+	        this.setState({ categories: data });
 
-					let initialSelectedStates = {};
-					let initialCategorySettings = {};
-					data.forEach(c => {
-						initialSelectedStates[c.name] = false;
-						initialCategorySettings[c.name] = { preferQuestionCount: 0 };
-					});
-					this.setState({
-						selectedStates: initialSelectedStates,
-						categorySettings: initialCategorySettings
-					});
-				}
-			});
-		},
+	        let initialSelectedStates = {};
+	        let initialCategorySettings = {};
+	        data.forEach(c => {
+	          initialSelectedStates[c.name] = false;
+	          initialCategorySettings[c.name] = { preferQuestionCount: 0 };
+	        });
+	        this.setState({
+	          selectedStates: initialSelectedStates,
+	          categorySettings: initialCategorySettings
+	        });
+	      }
+	    });
+	  },
 
-		handleCategoryButtonClicked: function (childProps) {
-			let newSelectedStates = this.state.selectedStates;
-			let newCategorySettings = this.state.categorySettings;
-			newSelectedStates[childProps.category.name] = !this.state.selectedStates[childProps.category.name];
-			newCategorySettings[childProps.category.name].preferQuestionCount = 0;
+	  handleCategoryButtonClicked: function (childProps) {
+	    let newSelectedStates = this.state.selectedStates;
+	    let newCategorySettings = this.state.categorySettings;
+	    newSelectedStates[childProps.category.name] = !this.state.selectedStates[childProps.category.name];
+	    newCategorySettings[childProps.category.name].preferQuestionCount = 0;
 
-			this.setState({ selectedStates: newSelectedStates, categorySettings: newCategorySettings });
-		},
+	    this.setState({ selectedStates: newSelectedStates, categorySettings: newCategorySettings });
+	  },
 
-		handleCategorySettingChanged: function (childProps, settings) {
-			let newCategorySettings = this.state.categorySettings;
-			newCategorySettings[childProps.category.name] = settings;
+	  handleCategorySettingChanged: function (childProps, settings) {
+	    let newCategorySettings = this.state.categorySettings;
+	    newCategorySettings[childProps.category.name] = settings;
 
-			this.setState({ categorySettings: newCategorySettings });
-		},
+	    this.setState({ categorySettings: newCategorySettings });
+	  },
 
-		handleOnSubmitButtonClicked: function () {
-			$.ajax({
-				url: `${ this.props.baseUrl }/api/exam/new`,
-				method: "POST",
-				contentType: "application/json",
-				data: JSON.stringify(this.state.categorySettings),
-				success: data => {
-					if (data.success) {
-						window.location.replace(`${ this.props.baseUrl }/exam/${ data.examId }`);
-					}
-				}
-			});
-		},
+	  handleOnSubmitButtonClicked: function () {
+	    $.ajax({
+	      url: `${ this.props.baseUrl }/api/exam/new`,
+	      method: "POST",
+	      contentType: "application/json",
+	      data: JSON.stringify(this.state.categorySettings),
+	      success: data => {
+	        if (data.success) {
+	          window.location.replace(`${ this.props.baseUrl }/exam/${ data.examId }`);
+	        }
+	      }
+	    });
+	  },
 
-		render: function () {
-			let categoryButtons = this.state.categories.map((c, i) => {
-				return React.createElement(CategoryButton, {
-					key: c.name,
-					category: c,
-					selected: this.state.selectedStates[c.name],
-					onCategoryButtonClicked: this.handleCategoryButtonClicked });
-			});
+	  render: function () {
+	    let categoryButtons = this.state.categories.map((c, i) => {
+	      return React.createElement(CategoryButton, {
+	        key: c.name,
+	        category: c,
+	        selected: this.state.selectedStates[c.name],
+	        onCategoryButtonClicked: this.handleCategoryButtonClicked });
+	    });
 
-			let CategoryCustomizers = this.state.categories.map((c, i) => {
-				if (this.state.selectedStates[c.name]) {
-					return React.createElement(CategoryCustomizer, {
-						key: c.name,
-						category: c,
-						onCategorySettingChanged: this.handleCategorySettingChanged });
-				}
-			});
+	    let CategoryCustomizers = this.state.categories.map((c, i) => {
+	      if (this.state.selectedStates[c.name]) {
+	        return React.createElement(CategoryCustomizer, {
+	          key: c.name,
+	          category: c,
+	          onCategorySettingChanged: this.handleCategorySettingChanged });
+	      }
+	    });
 
-			let selectedCategoryCount = this.state.categories.reduce((prev, current) => {
-				return this.state.selectedStates[current.name] ? prev + 1 : prev;
-			}, 0);
+	    let selectedCategoryCount = this.state.categories.reduce((prev, current) => {
+	      return this.state.selectedStates[current.name] ? prev + 1 : prev;
+	    }, 0);
 
-			let totalQuestionCount = 0;
-			for (category in this.state.categorySettings) {
-				totalQuestionCount += this.state.categorySettings[category].preferQuestionCount;
-			}
+	    let totalQuestionCount = 0;
+	    for (category in this.state.categorySettings) {
+	      totalQuestionCount += this.state.categorySettings[category].preferQuestionCount;
+	    }
 
-			return React.createElement(
-				'div',
-				{ className: this.state.categories.length > 0 ? 'show' : 'hidden' },
-				React.createElement(
-					'div',
-					{ className: 'jumbotron' },
-					React.createElement(
-						'div',
-						{ className: 'container' },
-						React.createElement(
-							'h2',
-							{ className: 'text-center' },
-							this.props.title
-						),
-						React.createElement(
-							'p',
-							{ className: 'text-center' },
-							this.props.subTitle
-						)
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'container' },
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'col-md-offset-2 col-md-8' },
-							React.createElement(
-								'h2',
-								null,
-								'เลือกหมวดหมู่ของคำถาม'
-							),
-							React.createElement(
-								'p',
-								null,
-								'คลิกที่ปุ่มของแต่ละหมวดหมู่ เพื่อเพิ่มคำถามจากหมวดหมู่นั้นเข้าสู่แบบทดสอบ'
-							),
-							categoryButtons
-						)
-					)
-				),
-				React.createElement('hr', null),
-				React.createElement(
-					'div',
-					{ className: (selectedCategoryCount > 0 ? 'show' : 'hidden') + ' container' },
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'col-md-offset-2 col-md-8' },
-							React.createElement(
-								'h2',
-								null,
-								'ปรับแต่งจำนวนคำถาม'
-							),
-							React.createElement(
-								'p',
-								null,
-								'เลื่อนสไลเดอร์เพื่อปรับจำนวนคำถามของแต่ละหมวดหมู่'
-							),
-							CategoryCustomizers,
-							React.createElement(QuestionCounter, { count: totalQuestionCount })
-						)
-					)
-				),
-				React.createElement('hr', { className: selectedCategoryCount > 0 ? 'show' : 'hidden' }),
-				React.createElement(
-					'div',
-					{ className: (selectedCategoryCount > 0 ? 'show' : 'hidden') + ' container' },
-					React.createElement(
-						'div',
-						{ className: 'row' },
-						React.createElement(
-							'div',
-							{ className: 'col-md-offset-2 col-md-8' },
-							React.createElement(
-								'div',
-								{ className: 'text-right' },
-								React.createElement(
-									'button',
-									{
-										type: 'button',
-										className: 'btn btn-success btn-lg bottom-15',
-										onClick: this.handleOnSubmitButtonClicked,
-										disabled: totalQuestionCount == 0 ? 'disable' : '' },
-									'เริ่มทำข้อสอบ'
-								)
-							)
-						)
-					)
-				)
-			);
-		}
+	    return React.createElement(
+	      'div',
+	      { className: this.state.categories.length > 0 ? 'show' : 'hidden' },
+	      React.createElement(
+	        'div',
+	        { className: 'jumbotron' },
+	        React.createElement(
+	          'div',
+	          { className: 'container' },
+	          React.createElement(
+	            'h2',
+	            { className: 'text-center' },
+	            this.props.title
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'text-center' },
+	            this.props.subTitle
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'text-center' },
+	            React.createElement(
+	              'span',
+	              { className: 'find-us-on-github' },
+	              'FIND US ON'
+	            ),
+	            React.createElement(
+	              'a',
+	              { href: 'https://github.com/hibikiledo/DLEQ' },
+	              React.createElement('img', { src: `${ this.props.baseUrl }/images/github-logo.png`, className: 'github-logo' })
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'container' },
+	        React.createElement(
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-offset-2 col-md-8' },
+	            React.createElement(
+	              'h2',
+	              null,
+	              'เลือกหมวดหมู่ของคำถาม'
+	            ),
+	            React.createElement(
+	              'p',
+	              null,
+	              'คลิกที่ปุ่มของแต่ละหมวดหมู่ เพื่อเพิ่มคำถามจากหมวดหมู่นั้นเข้าสู่แบบทดสอบ'
+	            ),
+	            categoryButtons
+	          )
+	        )
+	      ),
+	      React.createElement('hr', null),
+	      React.createElement(
+	        'div',
+	        { className: (selectedCategoryCount > 0 ? 'show' : 'hidden') + ' container' },
+	        React.createElement(
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-offset-2 col-md-8' },
+	            React.createElement(
+	              'h2',
+	              null,
+	              'ปรับแต่งจำนวนคำถาม'
+	            ),
+	            React.createElement(
+	              'p',
+	              null,
+	              'เลื่อนสไลเดอร์เพื่อปรับจำนวนคำถามของแต่ละหมวดหมู่'
+	            ),
+	            CategoryCustomizers,
+	            React.createElement(QuestionCounter, { count: totalQuestionCount })
+	          )
+	        )
+	      ),
+	      React.createElement('hr', { className: selectedCategoryCount > 0 ? 'show' : 'hidden' }),
+	      React.createElement(
+	        'div',
+	        { className: (selectedCategoryCount > 0 ? 'show' : 'hidden') + ' container' },
+	        React.createElement(
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-offset-2 col-md-8' },
+	            React.createElement(
+	              'div',
+	              { className: 'text-right' },
+	              React.createElement(
+	                'button',
+	                {
+	                  type: 'button',
+	                  className: 'btn btn-success btn-lg bottom-15',
+	                  onClick: this.handleOnSubmitButtonClicked,
+	                  disabled: totalQuestionCount == 0 ? 'disable' : '' },
+	                'เริ่มทำข้อสอบ'
+	              )
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
 	});
 
 	var CategoryButton = React.createClass({
-		displayName: 'CategoryButton',
+	  displayName: 'CategoryButton',
 
-		handleButtonClicked: function () {
-			this.props.onCategoryButtonClicked(this.props);
-		},
+	  handleButtonClicked: function () {
+	    this.props.onCategoryButtonClicked(this.props);
+	  },
 
-		render: function () {
-			return React.createElement(
-				'button',
-				{
-					type: 'input',
-					className: (this.props.selected ? 'active' : '') + ' btn btn-default btn-lg category-button',
-					onClick: this.handleButtonClicked },
-				this.props.category.name
-			);
-		}
+	  render: function () {
+	    return React.createElement(
+	      'button',
+	      {
+	        type: 'input',
+	        className: (this.props.selected ? 'active' : '') + ' btn btn-default btn-lg category-button',
+	        onClick: this.handleButtonClicked },
+	      this.props.category.name
+	    );
+	  }
 	});
 
 	var QuestionCounter = React.createClass({
-		displayName: 'QuestionCounter',
+	  displayName: 'QuestionCounter',
 
-		render: function () {
-			return React.createElement(
-				'h4',
-				null,
-				'จำนวนคำถามทั้งหมด ',
-				this.props.count,
-				' ข้อ'
-			);
-		}
+	  render: function () {
+	    return React.createElement(
+	      'h4',
+	      null,
+	      'จำนวนคำถามทั้งหมด ',
+	      this.props.count,
+	      ' ข้อ'
+	    );
+	  }
 	});
 
 	var CategoryCustomizer = React.createClass({
-		displayName: 'CategoryCustomizer',
+	  displayName: 'CategoryCustomizer',
 
-		getInitialState: function () {
-			return {
-				preferQuestionCount: 0
-			};
-		},
+	  getInitialState: function () {
+	    return {
+	      preferQuestionCount: 0
+	    };
+	  },
 
-		handleValueChanged: function (e) {
-			this.setState({ preferQuestionCount: e.target.value });
-			/* schema for settings of each category */
-			let settings = {
-				preferQuestionCount: e.target.value
-			};
-			this.props.onCategorySettingChanged(this.props, settings);
-		},
+	  handleValueChanged: function (e) {
+	    this.setState({ preferQuestionCount: e.target.value });
+	    /* schema for settings of each category */
+	    let settings = {
+	      preferQuestionCount: e.target.value
+	    };
+	    this.props.onCategorySettingChanged(this.props, settings);
+	  },
 
-		render: function () {
-			return React.createElement(
-				'div',
-				{ className: 'row' },
-				React.createElement(
-					'div',
-					{ className: 'col-md-12' },
-					React.createElement(
-						'div',
-						{ className: 'panel panel-primary' },
-						React.createElement(
-							'div',
-							{ className: 'panel-heading' },
-							this.props.category.name
-						),
-						React.createElement(
-							'div',
-							{ className: 'panel-body' },
-							React.createElement(
-								'h5',
-								null,
-								'จำนวนคำถาม ',
-								this.state.preferQuestionCount,
-								' / ',
-								this.props.category.questionCount
-							),
-							React.createElement(ReactBootstrapSlider, {
-								value: this.state.preferQuestionCount,
-								handleChange: this.handleValueChanged,
-								step: '1',
-								max: this.props.category.questionCount,
-								min: '0',
-								reverse: true })
-						)
-					),
-					React.createElement('h4', null)
-				)
-			);
-		}
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'row' },
+	      React.createElement(
+	        'div',
+	        { className: 'col-md-12' },
+	        React.createElement(
+	          'div',
+	          { className: 'panel panel-primary' },
+	          React.createElement(
+	            'div',
+	            { className: 'panel-heading' },
+	            this.props.category.name
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'panel-body' },
+	            React.createElement(
+	              'h5',
+	              null,
+	              'จำนวนคำถาม ',
+	              this.state.preferQuestionCount,
+	              ' / ',
+	              this.props.category.questionCount
+	            ),
+	            React.createElement(ReactBootstrapSlider, {
+	              value: this.state.preferQuestionCount,
+	              handleChange: this.handleValueChanged,
+	              step: '1',
+	              max: this.props.category.questionCount,
+	              min: '0',
+	              reverse: true })
+	          )
+	        ),
+	        React.createElement('h4', null)
+	      )
+	    );
+	  }
 	});
 
 	ReactDOM.render(React.createElement(QuizMakerApp, { baseUrl: baseUrl, title: title, subTitle: subTitle }), document.getElementById('quiz-maker-app'));
