@@ -72,9 +72,11 @@ router.get('/exams/:examId/results/:resultId', function(req, res) {
         .then((questions) => {
           response.questions = questions
           res.json({success: true, data: response})
+          db.close()
         })
         .catch((reason) => {
           res.json({success: false, reason: reason})
+          db.close()
         })
     })
   }
@@ -137,6 +139,7 @@ router.get('/questions/categories', function(req, res) {
         })
         res.json({success: true, data: data})
         console.log(result);
+        db.close()
       })
   })
 })
