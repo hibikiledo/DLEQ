@@ -43,3 +43,6 @@ jspm_packages
 public/bundle.js
 public/stylesheets/style.css
 public/stylesheets/style.css.map
+
+# Ignore sass caches
+.sass-cache
