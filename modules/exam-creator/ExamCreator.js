@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import update from 'react-addons-update'
-import classNames from 'classNames'
+import classNames from 'classnames'
 import $ from 'jquery'
 
 import CategorySelector from './CategorySelector'

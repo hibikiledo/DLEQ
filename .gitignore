@@ -38,3 +38,8 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Ignore webpack bundle outputs we bundle on server when deploy
+public/bundle.js
+public/stylesheets/style.css
+public/stylesheets/style.css.map

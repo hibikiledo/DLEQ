@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import classNames from 'classNames'
+import classNames from 'classnames'
 
 export default class CategoryButton extends Component {
   constructor(props) {

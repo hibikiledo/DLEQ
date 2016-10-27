@@ -28,7 +28,7 @@
       ref  : "origin/master",
       repo : "git@github.com:hibikiledo/DLEQ.git",
       path : "/home/node/dleq/production",
-      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production && sed -i -e 's#http://localhost:3000#https://dleq.hibikiledo.xyz#g' modules/Configuration.js && webpack"
     },
     dev : {
       user : "node",
