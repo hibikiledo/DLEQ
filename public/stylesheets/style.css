@@ -1,49 +1,24 @@
-.bottom-15 {
-	margin-bottom: 15px;
-}
-.bottom-30 {
-	margin-bottom: 30px;
-}
-.choice {
-	cursor: default;
-	line-height: 1.4;
-	letter-spacing: 0.02em;
-}
-/* Override color of active to red to show correct choice */
-.list-group-item.active.correct-choice, 
-.list-group-item.active.correct-choice:focus, 
-.list-group-item.active.correct-choice:hover {
-	background-color: red;
-}
-.exam-result {
-	margin-bottom: 30px;
-}
-.question-text {
-	margin-top: 60px;
-	margin-bottom: 25px;
-	line-height: 1.4;
-	letter-spacing: 0.04em;
-}
-.answer-key {
-	margin-top: 15px;
-}
-.category-button {
-	margin-right: 5px;
-	margin-bottom: 5px;
-}
-.question-image {
-	max-width: 50%
-}
-.end-of-page-margin {
-	margin-bottom: 20px;
-}
-.find-us-on-github {
-	vertical-align: bottom;
-	line-height: 1em;
-	font-size: 0.75em;
-}
-.github-logo {
-	height: 18px;
-	position:relative;
-	bottom:0;
-}
+.exam .question .question-text {
+  line-height: 1.5em;
+  margin-bottom: 20px; }
+.exam .question img {
+  margin-bottom: 10px; }
+.exam .question .choice {
+  font-size: 120%; }
+.exam .question .answer-key .well {
+  margin-top: 15px; }
+.exam .submit-button {
+  margin-bottom: 20px; }
+
+.exam-result .wrong-question .choice.active.correct-choice {
+  background-color: red; }
+.exam-result .wrong-question img {
+  margin-bottom: 10px; }
+
+.exam-creator .category-selector .btn {
+  margin-right: 5px;
+  margin-bottom: 5px; }
+.exam-creator .create-exam-button {
+  margin-bottom: 10px; }
+
+/*# sourceMappingURL=style.css.map */

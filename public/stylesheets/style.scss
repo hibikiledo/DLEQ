@@ -1,0 +1,45 @@
+.exam {
+  .question {
+    .question-text {
+      line-height: 1.5em;
+      margin-bottom: 20px;
+    }
+    img {
+      margin-bottom: 10px;
+    }
+    .choice {
+      font-size: 120%;
+    }
+    .answer-key {
+      .well {
+        margin-top: 15px;
+      }
+    }
+  }
+  .submit-button {
+    margin-bottom: 20px;
+  }
+}
+
+.exam-result {
+  .wrong-question {
+    .choice.active.correct-choice {
+      background-color: red;
+    }
+    img {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.exam-creator {
+  .category-selector {
+    .btn {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  .create-exam-button {
+    margin-bottom: 10px;
+  }
+}
