@@ -31,7 +31,7 @@ export default React.createClass({
             </ul>
             {/* Navbar Right */}
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Find us on <strong>Github</strong></a></li>
+              <li><a href="https://github.com/hibikiledo/DLEQ">Find us on <strong>Github</strong></a></li>
             </ul>
           </div>
         </div>
