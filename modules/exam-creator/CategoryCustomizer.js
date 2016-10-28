@@ -91,7 +91,7 @@ class CategoryCustomizer extends Component {
                     <button type="button" className="btn btn-default" onClick={this._onPlusFive}>+5</button>
                   </div>
                 </div>
-                <h5>คุณเลือก {this.state.preferQuestionCount} ข้อจากทั้งหมด {this.props.category.count}</h5>
+                <h5>คุณเลือก {this.state.preferQuestionCount} ข้อ จากทั้งหมด {this.props.category.count} ข้อ</h5>
               </div>
             </div>
           </div>
