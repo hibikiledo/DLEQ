@@ -149,6 +149,15 @@ router.post('/exams/create', function(req, res) {
   // Todo : Validate user request
   let questionPreferences = req.body.preferences
   
+  let totalQuestionCount = Object.keys(questionPreferences).reduce((prev, current) => {
+    return prev + questionPreferences[current].preferQuestionCount
+  }, 0)
+  
+  if (totalQuestionCount === 0) {
+    res.json({success: false, reason: "An exam should have at least 1 question."})
+    return;
+  }
+  
   let getSampleQuestionsPromises = Object.keys(questionPreferences).map((categoryName) => {
     let pref = questionPreferences[categoryName]
     return getSampleQuestions(categoryName, pref.preferQuestionCount)
