@@ -63,11 +63,17 @@ class ExamCreator extends Component {
   }
   _onCategorySelected(selectedCategoryNames) {
     this.setState({selectedCategoryNames: selectedCategoryNames})
-    console.log(selectedCategoryNames)
   }
   render() {
-    let categoryCustomizers = this.state.categories.filter((category) => {
-      return this.state.selectedCategoryNames.includes(category.name)
+    let categoryCustomizers = this.state.selectedCategoryNames
+    .map((categoryName) => {      
+      let matchCategory = null
+      this.state.categories.forEach((category) => {
+        if (category.name === categoryName) {          
+          matchCategory = category
+        }
+      })
+      return matchCategory
     })
     .map((category, i) => {
       return <CategoryCustomizer
@@ -75,6 +81,7 @@ class ExamCreator extends Component {
                 category={category}
                 onPreferenceChange={this._onPreferenceChange} />
     })
+
     return (
       <div className="exam-creator">
         <CategorySelector 
@@ -82,19 +89,19 @@ class ExamCreator extends Component {
           onCategorySelected={this._onCategorySelected} />
         { /* hide customizer and submit button when no category is selected */ }
         <div className={classNames({hidden: this.state.selectedCategoryNames.length == 0})}>
-          <hr />
+          <div className="row"><hr /></div>
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
               <h2>ปรับแต่งจำนวนคำถาม</h2>
               <p>
                 คุณสามารถระบุได้ว่า ในแบบทดสอบจะมีคำถามจากแต่ละหมวดหมู่จำนวนกี่คำถาม<br />
-                กดปุ่ม - หรือ + เพื่อเพิ่มหรือลดจำนวนคำถามของแต่ละหมวดหมู่
+                กดปุ่ม - หรือ + หรือ พิมพ์จำนวนคำถามของแต่ละหมวดหมู่
               </p>
             </div>
           </div>
           {categoryCustomizers}
           <div className="create-exam-button">
-            <hr />
+            <div className="row"><hr /></div>
             <div className="row">
               <div className="col-md-6 col-md-offset-3">
                 <div className="text-right">

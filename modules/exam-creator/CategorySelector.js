@@ -8,7 +8,8 @@ class CategorySelector extends Component {
     super(props)
     this.state = {
       selectedStates: Array.from({length: this.props.categories.length}, ()=>{return false})
-    }
+    }    
+    this.selectedCategoriesInOrder = []
 
     this._onCategoryButtonClick = this._onCategoryButtonClick.bind(this)
   }
@@ -22,16 +23,27 @@ class CategorySelector extends Component {
     )
     this.setState({
       selectedStates: updatedSelectedStates
-    })
-
-    // build list of selected categories
-    let selectedCategories = this.props.categories.filter((category, i) => {
+    })   
+    
+    // get array of selected category names
+    let selectedCategories = this.props.categories
+    .filter((category, i) => {
       return updatedSelectedStates[i]
     })
     .map((category, i) => {
       return category.name
-    })    
-    this.props.onCategorySelected(selectedCategories)
+    })
+
+    let category = this.props.categories[categoryId]
+    if (updatedSelectedStates[categoryId] === true) {
+      this.selectedCategoriesInOrder.push(category.name)
+    }
+    else {
+      let indexOfRemovingElement = this.selectedCategoriesInOrder.indexOf(category.name)
+      this.selectedCategoriesInOrder.splice(indexOfRemovingElement, 1)
+    }
+    console.log(this.selectedCategoriesInOrder)
+    this.props.onCategorySelected(this.selectedCategoriesInOrder)
   }
   render() {
     let categoryButtons = this.props.categories.map((category, i) => {
