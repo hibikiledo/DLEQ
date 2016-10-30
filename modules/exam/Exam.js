@@ -66,15 +66,21 @@ export default React.createClass({
     })
     return (
       <div className="exam">
-        <div className="container">
-          {questions}       
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">					
+            <h1>ข้อมูลชุดข้อสอบ</h1>
+            <p>
+              เลขที่ชุดข้อสอบ : {this.props.params.examId}<br />
+              จำนวนข้อสอบ : {this.state.questionSet.length}
+            </p>
+          </div>
         </div>
-        <hr />
-        <div className="container">
+        <div className="row"><hr /></div>
+          {questions}       
+        <div className="row"><hr /></div>
           <SubmitButton 
               text="ส่งข้อสอบ" 
               onClick={this._onExamSubmit} />
-        </div>
       </div>
     )
   }
