@@ -72,6 +72,7 @@ router.get('/exams/:examId/results/:resultId', function(req, res) {
           db.close()
         })
         .catch((reason) => {
+          console.log(reason)
           res.json({success: false, reason: reason})
           db.close()
         })
@@ -90,12 +91,11 @@ router.post('/exams/:examId/submit', function(req, res) {
 
     let answers = req.body.answers;
     
-    let passValidation = true
     Object.keys(answers).forEach((questionId) => {
       if ( ! (ObjectId.isValid(questionId) && Number.isInteger(answers[questionId])) )  {
         res.json({success: false, reason: "Answers data format is not recognized"})
         return
-      }      
+      }
     })
 
     MongoClient.connect(mongodbUrl, function(err, db) {
