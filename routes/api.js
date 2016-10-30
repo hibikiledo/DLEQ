@@ -4,8 +4,6 @@ var router = express.Router()
 var MongoClient = require('mongodb').MongoClient
 var ObjectId = require('mongodb').ObjectId
 var assert = require('assert')
-
-var CryptoJS = require("crypto-js")
 var uuid = require('node-uuid')
 
 const mongodbUrl = 'mongodb://localhost:27017/dleq'
@@ -42,7 +40,6 @@ router.get('/exams/:examId', function(req, res) {
   else {
     res.json({success: false, reason: 'exam_id is invalid'})
   }
-
 })
 
 router.get('/exams/:examId/results/:resultId', function(req, res) {
@@ -91,8 +88,15 @@ router.post('/exams/:examId/submit', function(req, res) {
 
   if (ObjectId.isValid(req.params.examId)) {
 
-    // Todo : Validate data from client
     let answers = req.body.answers;
+    
+    let passValidation = true
+    Object.keys(answers).forEach((questionId) => {
+      if ( ! (ObjectId.isValid(questionId) && Number.isInteger(answers[questionId])) )  {
+        res.json({success: false, reason: "Answers data format is not recognized"})
+        return
+      }      
+    })
 
     MongoClient.connect(mongodbUrl, function(err, db) {
       assert.equal(null, err)
@@ -157,14 +161,13 @@ router.post('/exams/create', function(req, res) {
     res.json({success: false, reason: "An exam should have at least 1 question."})
     return;
   }
-  
-  let getSampleQuestionsPromises = Object.keys(questionPreferences).map((categoryName) => {
-    let pref = questionPreferences[categoryName]
-    return getSampleQuestions(categoryName, pref.preferQuestionCount)
-  })
 
   MongoClient.connect(mongodbUrl, function(err, db) {
     assert.equal(null, err)
+    let getSampleQuestionsPromises = Object.keys(questionPreferences).map((categoryName) => {
+      let pref = questionPreferences[categoryName]
+      return getSampleQuestions(categoryName, pref.preferQuestionCount)
+    })
     Promise.all(getSampleQuestionsPromises)
       .then((questionsFromEachCategory) => {
         // result from Promise.all gives us double array 
